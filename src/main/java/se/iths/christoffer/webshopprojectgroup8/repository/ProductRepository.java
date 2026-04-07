@@ -6,5 +6,5 @@ import se.iths.christoffer.webshopprojectgroup8.model.Product;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    List<Product> findByCategoryOrder(String category);
+    List<Product> findByCategoryOrderByName(String category);
 }
