@@ -1,4 +1,4 @@
 package se.iths.christoffer.webshopprojectgroup8.repository;
 
-public class AppUserRepository {
+public interface AppUserRepository {
 }
