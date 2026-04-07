@@ -6,5 +6,5 @@ import se.iths.christoffer.webshopprojectgroup8.model.Order;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    List<Order> findByUsernameOrderByName(String username);
+    List<Order> findByUsernameOrderByOrderDateDesc(String username);
 }
