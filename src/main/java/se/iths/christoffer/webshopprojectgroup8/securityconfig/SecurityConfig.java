@@ -30,7 +30,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, OttSuccessHandler ottSuccessHandler, MyUserDetailsService myUserDetailsService) {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, OttSuccessHandler ottSuccessHandler, MyUserDetailsService myUserDetailsService) throws Exception {
         http
                 .userDetailsService(myUserDetailsService)
                 .authorizeHttpRequests(auth -> auth
