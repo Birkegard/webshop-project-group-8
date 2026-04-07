@@ -16,7 +16,7 @@ public class AppUser {
     @Column(unique = true, nullable = false)
     private String username; //ska vara email
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
