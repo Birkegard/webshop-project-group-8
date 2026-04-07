@@ -34,7 +34,7 @@ public class SecurityConfig {
         http
                 .userDetailsService(myUserDetailsService)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("admin/**").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/public/**", "/ott/sent").permitAll()
                         .anyRequest().authenticated()
