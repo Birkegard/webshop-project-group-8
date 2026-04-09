@@ -3,6 +3,7 @@ package se.iths.christoffer.webshopprojectgroup8.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import se.iths.christoffer.webshopprojectgroup8.model.Product;
 
 import java.math.BigDecimal;
@@ -23,5 +24,20 @@ public class ProductController {
         model.addAttribute("products", products);
 
         return "products";
+    }
+
+    @GetMapping("/products/{name}")
+    public String productDetails(@PathVariable String name, Model model) {
+
+        Product product = new Product(
+                name,
+                "Category",
+                new BigDecimal("10.00"),
+                "https://via.placeholder.com/150"
+        );
+
+        model.addAttribute("product", product);
+
+        return "product-details";
     }
 }

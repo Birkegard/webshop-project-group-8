@@ -46,7 +46,6 @@
 
 <body>
 
-<!-- NAVBAR -->
 <div class="navbar">
     <a href="/">Home</a>
     <a href="/products">Products</a>
@@ -54,10 +53,11 @@
 
 <h1>Products</h1>
 
-<!-- PRODUCTS LIST -->
 <div class="products">
     <div class="card" th:each="product : ${products}">
-        <h2 th:text="${product.name}"></h2>
+        <a th:href="@{/products/{name}(name=${product.name})}">
+            <h2 th:text="${product.name}"></h2>
+        </a>
         <p th:text="${product.category}"></p>
         <p th:text="${product.price}"></p>
         <img th:src="${product.imageURL}"/>
@@ -65,7 +65,6 @@
     </div>
 </div>
 
-<!-- BACK LINK -->
 <div style="margin-top:20px;">
     <a href="/">← Back to Home</a>
 </div>
