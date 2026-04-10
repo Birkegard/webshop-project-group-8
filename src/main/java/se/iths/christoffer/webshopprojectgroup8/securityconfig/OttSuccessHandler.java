@@ -8,15 +8,18 @@ import org.springframework.security.web.authentication.ott.OneTimeTokenGeneratio
 import org.springframework.security.web.authentication.ott.RedirectOneTimeTokenGenerationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import se.iths.christoffer.springmessenger.model.Email;
+import se.iths.christoffer.springmessenger.service.MessageService;
 
 import java.io.IOException;
 
 @Component
 public class OttSuccessHandler implements OneTimeTokenGenerationSuccessHandler {
-    //Lägg till service
+    private final MessageService messageService;
     private final RedirectOneTimeTokenGenerationSuccessHandler redirectOneTimeTokenGenerationSuccessHandler;
 
-    public OttSuccessHandler(RedirectOneTimeTokenGenerationSuccessHandler redirectOneTimeTokenGenerationSuccessHandler) {
+    public OttSuccessHandler(MessageService messageService, RedirectOneTimeTokenGenerationSuccessHandler redirectOneTimeTokenGenerationSuccessHandler) {
+        this.messageService = messageService;
         this.redirectOneTimeTokenGenerationSuccessHandler = redirectOneTimeTokenGenerationSuccessHandler;
     }
 
@@ -27,6 +30,11 @@ public class OttSuccessHandler implements OneTimeTokenGenerationSuccessHandler {
                 .queryParam("token", oneTimeToken.getTokenValue())
                 .toUriString();
 
-        //Lägg till kod för att skapa ett nytt email med uppgifter.
+        Email email = new Email();
+        email.setRecipient(request.getParameter("username"));
+        email.setMessage(link);
+        email.setSubject("One Time Token-Link");
+        messageService.send(email);
+        redirectOneTimeTokenGenerationSuccessHandler.handle(request, response, oneTimeToken);
     }
 }
