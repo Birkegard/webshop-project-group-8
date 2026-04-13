@@ -8,16 +8,6 @@
             font-family: Arial, sans-serif;
         }
 
-        .navbar {
-            margin-bottom: 20px;
-        }
-
-        .navbar a {
-            margin-right: 10px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
         .products {
             display: flex;
             gap: 20px;
@@ -46,28 +36,32 @@
 
 <body>
 
-<div class="navbar">
-    <a href="/">Home</a>
-    <a href="/products">Products</a>
-</div>
+<div th:replace="fragments/header :: header"></div>
 
 <h1>Products</h1>
 
 <div class="products">
     <div class="card" th:each="product : ${products}">
-        <a th:href="@{/products/{name}(name=${product.name})}">
+
+        <a th:href="@{/products/{id}(id=${product.id})}">
             <h2 th:text="${product.name}"></h2>
         </a>
+
         <p th:text="${product.category}"></p>
         <p th:text="${product.price}"></p>
+
         <img th:src="${product.imageURL}"/>
+
         <button>Add to cart</button>
+
     </div>
 </div>
 
 <div style="margin-top:20px;">
     <a href="/">← Back to Home</a>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

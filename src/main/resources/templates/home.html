@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
-    <meta charset="UTF-8">
 </head>
 <body>
+
+<div th:replace="fragments/header :: header"></div>
 
 <h1>Welcome to our webshop</h1>
 <p>This is the home page.</p>
 <a href="/products">Go to Products</a>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

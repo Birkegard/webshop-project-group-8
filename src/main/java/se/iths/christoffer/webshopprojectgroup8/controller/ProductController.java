@@ -26,13 +26,13 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/products/{name}")
-    public String productDetails(@PathVariable String name, Model model) {
+    @GetMapping("/products/{id}")
+    public String getProductById(@PathVariable Long id, Model model) {
 
         Product product = new Product(
-                name,
-                "Category",
-                new BigDecimal("10.00"),
+                "Test product",
+                "Category A",
+                new BigDecimal("100.00"),
                 "https://via.placeholder.com/150"
         );
 

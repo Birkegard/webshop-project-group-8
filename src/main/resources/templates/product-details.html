@@ -2,16 +2,47 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Product Details</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        img {
+            width: 250px;
+            margin: 20px 0;
+        }
+
+        .back-link {
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
 </head>
+
 <body>
 
-<h1 th:text="${product.name}"></h1>
-<p th:text="${product.category}"></p>
-<p th:text="${product.price}"></p>
-<img th:src="${product.imageURL}"/>
+<div th:replace="fragments/header :: header"></div>
 
-<br><br>
-<a href="/products">Back to products</a>
+<div class="container">
+
+    <h1 th:text="${product.name}"></h1>
+
+    <p th:text="${product.category}"></p>
+    <p th:text="${product.price}"></p>
+
+    <img th:src="${product.imageURL}"/>
+
+    <a class="back-link" href="/products">← Back to products</a>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

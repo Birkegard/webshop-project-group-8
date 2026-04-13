@@ -1,7 +1,30 @@
 <footer th:fragment="footer">
+
     <p>© 2026 Min applikation</p>
+
     <nav>
         <a th:href="@{/cookies}">Information om cookies</a>
         <a th:href="@{/policy}">Integritetspolicy</a>
     </nav>
+    
+    <div id="cookie-banner"
+         style="position: fixed; bottom: 0; width: 100%; background: #eee; padding: 10px; text-align: center; border-top: 1px solid #ccc;">
+
+        <span>This website uses cookies to improve your experience.</span>
+        <button onclick="acceptCookies()" style="margin-left: 10px;">OK</button>
+    </div>
+
+    <script>
+        function acceptCookies() {
+            document.getElementById("cookie-banner").style.display = "none";
+            localStorage.setItem("cookiesAccepted", "true");
+        }
+
+        window.onload = function () {
+            if (localStorage.getItem("cookiesAccepted") === "true") {
+                document.getElementById("cookie-banner").style.display = "none";
+            }
+        }
+    </script>
+
 </footer>
