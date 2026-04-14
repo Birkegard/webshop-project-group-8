@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/public/**", "/ott/sent").permitAll()
+                        .requestMatchers("/public/**", "/ott/sent", "/registration").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oneTimeTokenLogin(
