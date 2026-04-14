@@ -20,7 +20,7 @@ public class AppUser {
     @NotBlank(message = "Incorrect email")
     @Email
     @Column(unique = true, nullable = false)
-    private String username;
+    private String username; //email
 
     @NotBlank(message = "Incorrect password")
     @Size(min = 8, max = 20)
