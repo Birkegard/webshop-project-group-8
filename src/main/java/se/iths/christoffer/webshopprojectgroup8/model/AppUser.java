@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +22,6 @@ public class AppUser {
     private String username; //email
 
     @NotBlank(message = "Incorrect password")
-    @Size(min = 3, max = 100)
     @Column(nullable = false)
     private String password;
 
