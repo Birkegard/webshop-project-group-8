@@ -20,9 +20,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'maven'
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
 
       - name: Bygg med Maven
         run: mvn clean package -DskipTests
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Kör tester
         run: mvn test
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}

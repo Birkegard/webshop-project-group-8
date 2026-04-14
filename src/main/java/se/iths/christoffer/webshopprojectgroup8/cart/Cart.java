@@ -13,7 +13,7 @@ public class Cart {
         return items;
     }
 
-    public void addItems(Product product) {
+    public void addItem(Product product) {
         for (CartItem item : items) {
             if (item.getProductId().equals(product.getId())) {
                 item.setQuantity(item.getQuantity() + 1);
