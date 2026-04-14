@@ -1,36 +1,33 @@
 package se.iths.christoffer.webshopprojectgroup8.controller;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import se.iths.christoffer.webshopprojectgroup8.model.AppUser;
-import se.iths.christoffer.webshopprojectgroup8.repository.AppUserRepository;
+import se.iths.christoffer.webshopprojectgroup8.service.RegistrationService;
 
 @Controller
+@RequestMapping("/registration")
 public class RegistrationController {
     //byt ut appUserRepository och encoder mot en serivce istället.
-    private final AppUserRepository appUserRepository;
+    private final RegistrationService registrationService;
 
-    private final PasswordEncoder encoder;
-
-    public RegistrationController(AppUserRepository appUserRepository, PasswordEncoder encoder) {
-        this.appUserRepository = appUserRepository;
-        this.encoder = encoder;
+    public RegistrationController(RegistrationService registrationService) {
+        this.registrationService = registrationService;
     }
 
-    @GetMapping("/registration")
+    @GetMapping
     public String showRegistrationForm(Model model) {
         model.addAttribute("register", new AppUser());
         return "registration";
     }
 
-    @PostMapping("/registration")
+    @PostMapping
     public String registration(@ModelAttribute AppUser appUser) {
-        appUser.setPassword(encoder.encode(appUser.getPassword()));
-        appUserRepository.save(appUser);
+        registrationService.registration(appUser);
         return "redirect:/";
 
     }

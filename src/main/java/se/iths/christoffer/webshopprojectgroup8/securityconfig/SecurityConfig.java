@@ -36,13 +36,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/public/**", "/ott/sent", "/registration").permitAll()
+                        .requestMatchers("/public/**", "/ott/sent", "/registration/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .oneTimeTokenLogin(
                         ott -> ott.tokenGenerationSuccessHandler(
-                                ottSuccessHandler
-                        ));
+                                        ottSuccessHandler
+                                )
+                                .defaultSuccessUrl("/products"));
         http.formLogin(Customizer.withDefaults());
 
         return http.build();
