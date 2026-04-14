@@ -19,12 +19,6 @@
     <label for="password">Password: </label>
     <input id="password" type="password" th:field="*{password}" placeholder="Password..." required="required"><br/>
 
-    <label for="role">Role: </label>
-    <select id="role" th:field="*{role}">
-        <option value="ADMIN">Admin</option>
-        <option value="USER">User</option>
-    </select><br/>
-
     <label for="consent">
         <input id="consent" type="checkbox" th:field="*{consent}">
         I consent to my data being stored
