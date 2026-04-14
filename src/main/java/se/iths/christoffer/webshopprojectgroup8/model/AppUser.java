@@ -19,7 +19,7 @@ public class AppUser {
     @NotBlank(message = "Incorrect email")
     @Email
     @Column(unique = true, nullable = false)
-    private String username; //email
+    private String username;
 
     @NotBlank(message = "Incorrect password")
     @Column(nullable = false)
