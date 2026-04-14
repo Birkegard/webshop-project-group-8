@@ -27,13 +27,7 @@ public class DatabaseInit {
         admin.setRole("ADMIN");
         admin.setConsent(true);
 
-        AppUser user = new AppUser();
-        user.setUsername("user");
-        user.setPassword(passwordEncoder.encode("123"));
-        user.setRole("USER");
-        user.setConsent(true);
-
-        List<AppUser> users = List.of(admin, user);
+        List<AppUser> users = List.of(admin);
         users.stream()
                 .filter(use -> appUserRepository.findByUsername(use.getUsername()).isEmpty())
                 .forEach(appUserRepository::save);
