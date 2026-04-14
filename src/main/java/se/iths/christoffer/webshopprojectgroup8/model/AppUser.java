@@ -23,7 +23,7 @@ public class AppUser {
     private String username; //email
 
     @NotBlank(message = "Incorrect password")
-    @Size(min = 8, max = 20)
+    @Size(min = 3, max = 20)
     @Column(nullable = false)
     private String password;
 
