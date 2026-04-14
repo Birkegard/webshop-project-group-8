@@ -1,6 +1,10 @@
 package se.iths.christoffer.webshopprojectgroup8.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,15 +17,20 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Incorrect email")
+    @Email
     @Column(unique = true, nullable = false)
-    private String username; //ska vara email
+    private String username;
 
+    @NotBlank(message = "Incorrect password")
+    @Size(min = 8, max = 20)
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
     private String role;
 
+    @AssertTrue(message = "You must consent to the storage of personal data")
     @Column(nullable = false)
     private boolean consent;
 
