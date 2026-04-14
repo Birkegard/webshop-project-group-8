@@ -1,0 +1,15 @@
+<header th:fragment="header" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <h1>Caya Clothes</h1>
+    <nav>
+        <a th:href="@{/}" th:classappend="${activePage == 'home'} ? 'active'">Home</a>
+        <a th:href="@{/products}" th:classappend="${activePage == 'products'} ? 'active'">Produkter</a>
+    </nav>
+    <div sec:authorize="isAuthenticated()">
+        Inloggad som: <span sec:authentication="name"></span>
+        <a th:href="@{/logout}">Logga ut</a>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <a th:href="@{/login}">Logga in</a>
+    </div>
+
+</header>

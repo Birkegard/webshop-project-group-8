@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<h1>Your cart</h1>
+
+<div th:if="${#lists.isEmpty(cart.items)}">
+    <p>Your cart is empty</p>
+    <a th:href="@{/products}">Continue browsing products</a>
+</div>
+
+<div th:unless="${#lists.isEmpty(cart.items)}">
+    <table>
+        <thead>
+        <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Remove</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cart.items}">
+            <td th:text="${item.productName}">Product</td>
+            <td th:text="${item.price}">0.00</td>
+            <td th:text="${item.quantity}">1</td>
+            <td>
+                <form th:action="@{/cart/remove/{id}(id=${item.productId})}" method="post">
+                    <button type="submit">Remove</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>
+        <strong>Total amount: </strong>
+        <span th:text="${cart.totalPrice}">0.00</span>
+    </p>
+
+    <form th:action="@{/cart/clear}" method="post">
+        <button type="submit">Empty cart</button>
+    </form>
+    <br>
+    <a th:href="@{/products}">Continue shopping</a>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
