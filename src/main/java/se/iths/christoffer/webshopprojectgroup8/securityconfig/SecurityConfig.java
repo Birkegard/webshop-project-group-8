@@ -2,7 +2,6 @@ package se.iths.christoffer.webshopprojectgroup8.securityconfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authorization.EnableMultiFactorAuthentication;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,15 +35,17 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
-                        .requestMatchers("/public/**", "/ott/sent", "/registration/**").permitAll()
+                        .requestMatchers("/public/**", "/ott/sent", "/registration/**", "/").permitAll()
                         .anyRequest().authenticated()
                 )
+                .formLogin(form -> form
+                        .defaultSuccessUrl("/products", true))
+
                 .oneTimeTokenLogin(
-                        ott -> ott.tokenGenerationSuccessHandler(
-                                        ottSuccessHandler
-                                )
-                                .defaultSuccessUrl("/products"));
-        http.formLogin(Customizer.withDefaults());
+                        ott -> ott
+                                .tokenGenerationSuccessHandler(ottSuccessHandler)
+                                .defaultSuccessUrl("/products", true));
+
 
         return http.build();
 
