@@ -35,7 +35,7 @@ public class ProductService {
 
     public Product updateProduct(Long id, Product updated) {
         Product existing = productRepository.findById(id)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("Product not found"));
 
         existing.setName(updated.getName());
         existing.setCategory(updated.getCategory());
