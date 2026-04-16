@@ -56,4 +56,10 @@ public class CartController {
         cart.clear();
         return "redirect:/cart";
     }
+
+    @PostMapping("/checkout")
+    public String checkout(@ModelAttribute("cart") Cart cart) {
+        cart.clear();
+        return "order-confirmation";
+    }
 }

@@ -61,6 +61,10 @@
         <br>
         <a th:href="@{/products}">Continue shopping</a>
     </div>
+
+    <form action="/cart/checkout" method="post">
+        <button type="submit">Checkout</button>
+    </form>
 </main>
 <th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
