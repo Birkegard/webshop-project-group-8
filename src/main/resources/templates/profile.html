@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<h1>Profile</h1>
+Username: <span th:text="${user.username}"></span><br/>
+Role: <span th:text="${user.role}"></span><br/>
+
+<form th:action="@{/profile/{id}(id=${user.id})}" method="post" style="display: inline;">
+    <button type="submit">Send user details</button>
+</form>
+
+<form th:action="@{/profile/{id}(id=${user.id})}" method="post" style="display: inline;">
+    <input type="hidden" name="_method" value="DELETE">
+    <button type="submit">Delete user</button>
+</form>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
