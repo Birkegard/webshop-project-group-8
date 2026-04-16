@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>Home</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <script>
+        function acceptCookies() {
+            document.cookie = "cookiesAccepted=true; path=/;";
+            document.getElementById("cookie-banner").style.display = "none";
+        }
+
+        window.onload = function () {
+            if (document.cookie.includes("cookiesAccepted=true")) {
+                document.getElementById("cookie-banner").style.display = "none";
+            }
+        }
+    </script>
 </head>
+
 <body>
-<th:block th:replace="~{fragments/header :: header}"></th:block>
-<main>
-    <h1>Welcome to our webshop</h1>
-    <p>This is the home page.</p>
-    <a href="/products">Go to Products</a>
-</main>
-<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+<div th:replace="fragments/header :: header"></div>
+
+<h1>Welcome to our webshop</h1>
+<p>This is the home page.</p>
+<a href="/products">Go to Products</a>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<div id="cookie-banner">
+    This site uses cookies 🍪
+    <button onclick="acceptCookies()">Accept</button>
+</div>
+
 </body>
 </html>
