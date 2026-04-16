@@ -7,20 +7,24 @@
 </head>
 <body>
 <div th:replace="~{fragments/header :: header}"></div>
+<main>
+    <div class="panel">
+        <h1>Profile</h1>
+        <div><strong>Username: </strong><span th:text="${user.username}"></span></div>
+        <br/>
+        <div><strong>Role: </strong><span th:text="${user.role}"></span></div>
+        <br/>
 
-<h1>Profile</h1>
-Username: <span th:text="${user.username}"></span><br/>
-Role: <span th:text="${user.role}"></span><br/>
+        <form th:action="@{/profile/{id}(id=${user.id})}" method="post" style="display: inline;">
+            <button type="submit">Send user details</button>
+        </form>
 
-<form th:action="@{/profile/{id}(id=${user.id})}" method="post" style="display: inline;">
-    <button type="submit">Send user details</button>
-</form>
-
-<form th:action="@{/profile/{id}(id=${user.id})}" method="post" style="display: inline;">
-    <input type="hidden" name="_method" value="DELETE">
-    <button type="submit">Delete user</button>
-</form>
-
+        <form th:action="@{/profile/{id}(id=${user.id})}" method="post" style="display: inline;">
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit">Delete user</button>
+        </form>
+    </div>
+</main>
 <div th:replace="~{fragments/footer :: footer}"></div>
 </body>
 </html>

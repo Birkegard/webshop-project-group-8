@@ -5,8 +5,12 @@
     <title>Token sent</title>
 </head>
 <body>
-
-<h2>A one time token has been sent to your Email.</h2>
-
+<th:block th:replace="~{fragments/header :: header}"></th:block>
+<main>
+    <div class="panel">
+        <h2>A one time token has been sent to your Email.</h2>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>

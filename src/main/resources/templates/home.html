@@ -36,6 +36,7 @@
 </head>
 
 <body>
+<<<<<<< HEAD
 
 <div th:replace="fragments/header :: header"></div>
 
@@ -51,5 +52,14 @@
     <button onclick="acceptCookies()">Accept</button>
 </div>
 
+=======
+<th:block th:replace="~{fragments/header :: header}"></th:block>
+<main>
+    <h1>Welcome to our webshop</h1>
+    <p>This is the home page.</p>
+    <a href="/products">Go to Products</a>
+</main>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
+>>>>>>> 10bb25396adec6243066aba80ca2aa5571a512c1
 </body>
 </html>

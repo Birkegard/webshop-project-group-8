@@ -3,60 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"></div>
-<h1>Add products</h1>
-<form th:action="@{/admin/products}" th:object="${product}" method="post">
-    <div>
-        <label for="name">Product name: </label>
-        <input id="name" type="text" th:field="*{name}">
-        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-    </div>
-    <br>
-    <div>
-        <label for="category">Product category: </label>
-        <input id="category" type="text" th:field="*{category}">
-        <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
-    </div>
-    <br>
-    <div>
-        <label for="price">Product price: </label>
-        <input id="price" type="number" step="0.01" th:field="*{price}">
-        <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
-    </div>
-    <br>
-    <div>
-        <label for="imageURL">Product image URL: </label>
-        <input id="imageURL" type="text" th:field="*{imageURL}">
-        <p th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}"></p>
-    </div>
-    <br>
-    <button type="submit">Create product</button>
-</form>
+<th:block th:replace="~{fragments/header :: header}"></th:block>
 
-<h2>Current products</h2>
-<div th:if="${#lists.isEmpty(products)}">
-    <p>No product added to inventory</p>
-</div>
+<main>
+    <div class="form-card">
+        <h1>Add products</h1>
+        <form th:action="@{/admin/products}" th:object="${product}" method="post">
+            <div>
+                <label for="name">Product name: </label>
+                <input id="name" type="text" th:field="*{name}">
+                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+            </div>
 
-<table th:unless="${#lists.isEmpty(products)}" border="1">
-    <thead>
-    <tr>
-        <th>Product</th>
-        <th>Category</th>
-        <th>Price</th>
-        <th>Image</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="product : ${products}">
-        <td th:text="${product.name}">Name</td>
-        <td th:text="${product.category}">Category</td>
-        <td th:text="${product.price}">Price</td>
-        <td><img th:src="${product.imageURL}" alt="Product Image" width="100"></td>
-    </tr>
-    </tbody>
-</table>
+            <div>
+                <label for="category">Product category: </label>
+                <input id="category" type="text" th:field="*{category}">
+                <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></p>
+            </div>
+
+            <div>
+                <label for="price">Product price: </label>
+                <input id="price" type="number" step="0.01" th:field="*{price}">
+                <p th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></p>
+            </div>
+
+            <div>
+                <label for="imageURL">Product image URL: </label>
+                <input id="imageURL" type="text" th:field="*{imageURL}">
+                <p th:if="${#fields.hasErrors('imageURL')}" th:errors="*{imageURL}"></p>
+            </div>
+            <button type="submit">Create product</button>
+        </form>
+        <br>
+        <h2>Current products</h2>
+        <div th:if="${#lists.isEmpty(products)}">
+            <p>No product added to inventory</p>
+        </div>
+
+        <table th:unless="${#lists.isEmpty(products)}">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Image</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.name}">Name</td>
+                <td th:text="${product.category}">Category</td>
+                <td th:text="${product.price}">Price</td>
+                <td><img th:src="${product.imageURL}" th:alt="${product.name}" width="100"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>
