@@ -27,3 +27,9 @@ nav {
     position: absolute;
     right: 50px;
 }
+
+.active {
+    color: indigo;
+    font-weight: bold;
+    text-decoration: underline;
+}
