@@ -44,6 +44,13 @@ public class CartController {
         return "redirect:/cart";
     }
 
+    @PostMapping("/decrease/{id}")
+    public String decreaseCart(@PathVariable Long id,
+                               @ModelAttribute("cart") Cart cart) {
+        cart.decreaseQuantity(id);
+        return "redirect:/cart";
+    }
+
     @PostMapping("/clear")
     public String clearCart(@ModelAttribute("cart") Cart cart) {
         cart.clear();

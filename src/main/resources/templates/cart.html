@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Cart</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <th:block th:replace="~{fragments/header :: head}"></th:block>
 </head>
 <body>
-<div th:replace="~{fragments/header :: header}"></div>
-
+<th:block th:replace="~{fragments/header :: header}"></th:block>
 <h1>Your cart</h1>
 
 <div th:if="${#lists.isEmpty(cart.items)}">
@@ -29,7 +29,18 @@
         <tr th:each="item : ${cart.items}">
             <td th:text="${item.productName}">Product</td>
             <td th:text="${item.price}">0.00</td>
-            <td th:text="${item.quantity}">1</td>
+            <td>
+                <form th:action="@{/cart/decrease/{id}(id=${item.productId})}" method="post"
+                      style="display:inline;">
+                    <button type="submit">-</button>
+                </form>
+                <span th:text="${item.quantity}" style="margin: 0 10px;">1</span>
+
+                <form th:action="@{/cart/add/{id}(id=${item.productId})}" method="post"
+                      style="display:inline;">
+                    <button type="submit">+</button>
+                </form>
+            </td>
             <td>
                 <form th:action="@{/cart/remove/{id}(id=${item.productId})}" method="post">
                     <button type="submit">Remove</button>
@@ -51,7 +62,6 @@
     <a th:href="@{/products}">Continue shopping</a>
 </div>
 
-<div th:replace="~{fragments/footer :: footer}"></div>
-
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>
