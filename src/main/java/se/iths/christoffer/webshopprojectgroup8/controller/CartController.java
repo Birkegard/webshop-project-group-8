@@ -5,16 +5,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.iths.christoffer.webshopprojectgroup8.cart.Cart;
 import se.iths.christoffer.webshopprojectgroup8.model.Product;
-import se.iths.christoffer.webshopprojectgroup8.repository.ProductRepository;
+import se.iths.christoffer.webshopprojectgroup8.service.ProductService;
 
 @Controller
 @RequestMapping("/cart")
 @SessionAttributes("cart")
 public class CartController {
-    private final ProductRepository productRepository;
+    private final ProductService productService;
 
-    public CartController(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public CartController(ProductService productService) {
+        this.productService = productService;
     }
 
     @ModelAttribute("cart")
@@ -31,11 +31,8 @@ public class CartController {
     public String addToCart(@PathVariable Long id,
                             @ModelAttribute("cart") Cart cart) {
 
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
-
+        Product product = productService.getProductById(id);
         cart.addItem(product);
-
         return "redirect:/cart";
     }
 
