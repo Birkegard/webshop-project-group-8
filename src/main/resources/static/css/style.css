@@ -1,0 +1,35 @@
+header {
+    width: 100%;
+    position: relative;
+}
+
+header h1 {
+    text-align: center;
+}
+
+.header-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    gap: 1rem;
+}
+
+.user-info {
+    position: absolute;
+    right: 0;
+}
+
+.register {
+    position: absolute;
+    right: 50px;
+}
+
+.active {
+    color: indigo;
+    font-weight: bold;
+    text-decoration: underline;
+}

@@ -28,6 +28,19 @@ public class Cart {
         ));
     }
 
+    public void decreaseQuantity(Long productId) {
+        for (CartItem item : items) {
+            if (item.getProductId().equals(productId)) {
+                if (item.getQuantity() > 1) {
+                    item.setQuantity(item.getQuantity() - 1);
+                } else {
+                    removeItem(productId);
+                }
+                return;
+            }
+        }
+    }
+
     public void removeItem(Long productId) {
         items.removeIf(item -> item.getProductId().equals(productId));
     }
