@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 public class ProductService {
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
@@ -22,7 +22,7 @@ public class ProductService {
     }
 
     public Product getProductById(Long id){
-        return productRepository.findById(id).orElseThrow();
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("product not found"));
     }
 
     public Product createProduct(Product product) {
