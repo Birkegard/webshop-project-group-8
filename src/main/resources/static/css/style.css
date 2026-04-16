@@ -78,7 +78,11 @@ nav a.active {
 
 .register {
     position: absolute;
-    right: 50px;
+    right: 65px;
+    top: 0;
+    text-align: right;
+    font-size: 1rem;
+    color: rgba(95, 85, 80, 0.78);
 }
 
 /*headers*/
