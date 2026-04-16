@@ -3,101 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>Privacy Policy</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
+<th:block th:replace="~{fragments/header :: header}"></th:block>
 <h1>Privacy Policy</h1>
-
 <small>Last updated: 2026-04-14</small>
-
+<br>
 <p>This Privacy Policy explains how we collect, use, and protect your information when you use our website or
     services.</p>
 
 <section>
     <h3>1. Information We Collect</h3>
-
     <p>We may collect the following types of information:</p>
-
     <ul>
-        * <strong>Personal information</strong> you provide, such as your name, email address, or contact details.
+        <li>* <strong>Personal information</strong> you provide, such as your name, email address, or contact details.
+        </li>
+        <li>* <strong>Usage data</strong>, such as pages visited, time spent on the site, and interactions.</li>
+        <li>* <strong>Technical data</strong>, such as IP address, browser type, and device information.</li>
+        <li>* <strong>Cookies and similar technologies</strong> (see our Cookie Policy for more details).</li>
     </ul>
-    <ul>
-        * <strong>Usage data</strong>, such as pages visited, time spent on the site, and interactions.
-    </ul>
-    <ul>
-        * <strong>Technical data</strong>, such as IP address, browser type, and device information.
-    </ul>
-    <ul>
-        * <strong>Cookies and similar technologies</strong> (see our Cookie Policy for more details).
-    </ul>
-
 </section>
 
 <section>
     <h3>2. How We Use Your Information</h3>
-
     <p>We use your information to:</p>
     <ul>
-        * Provide and maintain our services
-    </ul>
-    <ul>
-        * Improve user experience and analyze usage
-    </ul>
-    <ul>
-        * Communicate with you, including responding to inquiries
-    </ul>
-    <ul>
-        * Comply with legal obligations
+        <li>* Provide and maintain our services</li>
+        <li>* Improve user experience and analyze usage</li>
+        <li>* Communicate with you, including responding to inquiries</li>
+        <li>* Comply with legal obligations</li>
     </ul>
 </section>
+
 <section>
     <h3>3. Sharing of Information</h3>
-
     <p>We do not sell your personal data. We may share your information with:</p>
-
-    <ul>* Service providers who help us operate our website or services</ul>
-    <ul>* Authorities if required by law or to protect our rights</ul>
+    <ul>
+        <li>* Service providers who help us operate our website or services</li>
+        <li>* Authorities if required by law or to protect our rights</li>
+    </ul>
 </section>
+
 <section>
     <h3>4. Data Retention</h3>
-
     <p>We retain your information only as long as necessary to fulfill the purposes outlined in this policy, unless a
         longer retention period is required by law.</p>
 </section>
+
 <section>
     <h3>5. Your Rights</h3>
-
     <p>Depending on your location, you may have the right to:</p>
-
-    <ul>* Access your personal data</ul>
-    <ul>* Request correction or deletion</ul>
-    <ul>* Object to or restrict processing</ul>
-    <ul>* Withdraw consent at any time</ul>
-
+    <ul>
+        <li>* Access your personal data</li>
+        <li>* Request correction or deletion</li>
+        <li>* Object to or restrict processing</li>
+        <li>* Withdraw consent at any time</li>
+    </ul>
     <p>To exercise your rights, please contact us at: [Insert Contact Email]</p>
 </section>
+
 <section>
     <h3>6. Data Security</h3>
-
     <p>We take reasonable measures to protect your information, but no method of transmission over the internet is
         completely secure.</p>
 </section>
+
 <section>
     <h3>7. Third-Party Links</h3>
-
     <p>Our website may contain links to third-party websites. We are not responsible for their privacy practices.</p>
 </section>
+
 <section>
     <h3>8. Changes to This Policy</h3>
-
     <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated
         date.</p>
 </section>
+
 <section>
     <h3>9. Contact Us</h3>
-
     <p>If you have any questions about this Privacy Policy, you can contact us at:</p>
     <p>CAYA Clothes</p>
     <p>security@caya.com</p>
 </section>
+
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>

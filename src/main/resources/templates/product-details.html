@@ -3,47 +3,28 @@
 <head>
     <title>Product Details</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        img {
-            width: 250px;
-            margin: 20px 0;
-        }
-
-        .back-link {
-            margin-top: 20px;
-            display: block;
-        }
-    </style>
 </head>
 
 <body>
+<th:block th:replace="~{fragments/header :: header}"></th:block>
+<main>
+    <div class="product-details">
+        <img th:src="${product.imageURL}" th:alt="${product.name}"/>
 
-<div th:replace="fragments/header :: header"></div>
+        <div class="product-info">
+            <h1 th:text="${product.name}"></h1>
+            <p th:text="${product.category}"></p>
+            <p th:text="${product.price}"></p>
 
-<div class="container">
+            <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+                <button type="submit">Add to cart</button>
+            </form>
+        </div>
 
-    <h1 th:text="${product.name}"></h1>
+        <a class="back-link" href="/products">← Back to products</a>
 
-    <p th:text="${product.category}"></p>
-    <p th:text="${product.price}"></p>
-
-    <img th:src="${product.imageURL}"/>
-
-    <a class="back-link" href="/products">← Back to products</a>
-
-</div>
-
-<div th:replace="fragments/footer :: footer"></div>
-
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>
