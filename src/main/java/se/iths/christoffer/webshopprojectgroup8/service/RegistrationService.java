@@ -32,6 +32,11 @@ public class RegistrationService {
                 .orElseThrow(() -> new UsernameNotFoundException("Användare med id: " + id + " finns inte."));
     }
 
+    public AppUser getUserByUsername(String username) {
+        return appUserRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Användaren finns inte."));
+    }
+
     public void deleteAppUser(Long id) {
         appUserRepository.deleteById(id);
     }
