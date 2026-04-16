@@ -20,6 +20,9 @@
         <div class="register" sec:authorize="!isAuthenticated()">
             <a th:href="@{/registration}">Register</a>
         </div>
+        <div class="admin-btn" sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin}" class="btn">Admin</a>
+        </div>
     </div>
 
 </header>
