@@ -5,14 +5,12 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-
-<div th:replace="fragments/header :: header"></div>
-
-<h1>Welcome to our webshop</h1>
-<p>This is the home page.</p>
-<a href="/products">Go to Products</a>
-
-<div th:replace="fragments/footer :: footer"></div>
-
+<th:block th:replace="~{fragments/header :: header}"></th:block>
+<main>
+    <h1>Welcome to our webshop</h1>
+    <p>This is the home page.</p>
+    <a href="/products">Go to Products</a>
+</main>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>

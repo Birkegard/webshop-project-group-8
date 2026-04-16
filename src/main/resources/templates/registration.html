@@ -3,30 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <style>
-        label {
-            display: block;
-            margin: 5px;
-        }
-    </style>
 </head>
 <body>
-<h2>Register user</h2>
-<form th:action="@{/registration}" th:object="${register}" method="post">
+<th:block th:replace="~{fragments/header :: header}"></th:block>
+<main>
+    <div class="form-card">
+        <h2>Register user</h2>
+        <form th:action="@{/registration}" th:object="${register}" method="post">
 
-    <label for="username">Username: </label>
-    <input id="username" type="email" th:field="*{username}" placeholder="Username..." required="required"><br/>
+            <label for="username">Username: </label>
+            <input id="username" type="email" th:field="*{username}" placeholder="Username..." required="required"><br/>
 
-    <label for="password">Password: </label>
-    <input id="password" type="password" th:field="*{password}" placeholder="Password..." required="required"><br/>
+            <label for="password">Password: </label>
+            <input id="password" type="password" th:field="*{password}" placeholder="Password..."
+                   required="required"><br/>
 
-    <label for="consent">
-        <input id="consent" type="checkbox" th:field="*{consent}">
-        I consent to my data being stored
-    </label><br/>
-    <button type="submit">Register</button>
+            <label for="consent">
+                <input id="consent" type="checkbox" th:field="*{consent}">
+                I consent to my data being stored
+            </label><br/>
+            <button type="submit">Register</button>
 
-</form>
-
+        </form>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>

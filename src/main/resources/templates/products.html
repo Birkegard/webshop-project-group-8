@@ -1,68 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Products</title>
+    <title>ALL CLOTHING</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .products {
-            display: flex;
-            gap: 20px;
-        }
-
-        .card {
-            border: 1px solid #ccc;
-            padding: 15px;
-            width: 200px;
-            text-align: center;
-            border-radius: 8px;
-        }
-
-        img {
-            width: 150px;
-            margin-bottom: 10px;
-        }
-
-        button {
-            margin-top: 10px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
+<th:block th:replace="~{fragments/header :: header}"></th:block>
+<main>
+    <h1>ALL CLOTHING</h1>
 
-<div th:replace="fragments/header :: header"></div>
+    <div class="products">
+        <div class="card" th:each="product : ${products}">
 
-<h1>Products</h1>
+            <a th:href="@{/products/{id}(id=${product.id})}">
+                <h2 th:text="${product.name}"></h2>
+            </a>
 
-<div class="products">
-    <div class="card" th:each="product : ${products}">
+            <p th:text="${product.category}"></p>
+            <p th:text="${product.price}"></p>
 
-        <a th:href="@{/products/{id}(id=${product.id})}">
-            <h2 th:text="${product.name}"></h2>
-        </a>
+            <img th:src="${product.imageURL}" th:alt="${product.name}"/>
 
-        <p th:text="${product.category}"></p>
-        <p th:text="${product.price}"></p>
+            <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+                <button type="submit">Add to cart</button>
+            </form>
 
-        <img th:src="${product.imageURL}"/>
-
-        <button>Add to cart</button>
-
+        </div>
     </div>
-</div>
 
-<div style="margin-top:20px;">
-    <a href="/">← Back to Home</a>
-</div>
-
-<div th:replace="fragments/footer :: footer"></div>
-
+    <div style="margin-top:20px;">
+        <a href="/">← Back to Home</a>
+    </div>
+</main>
+<th:block th:replace="~{fragments/footer :: footer}"></th:block>
 </body>
 </html>
