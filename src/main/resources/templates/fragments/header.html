@@ -4,6 +4,7 @@
         <nav>
             <a th:href="@{/}" th:classappend="${activePage == 'home'} ? 'active'">Home</a>
             <a th:href="@{/products}" th:classappend="${activePage == 'products'} ? 'active'">Products</a>
+            <a th:href="@{/cart}" th:classappend="${activePage == 'cart'} ? 'active'">Cart</a>
         </nav>
         <div class="user-info" sec:authorize="isAuthenticated()">
             User: <a th:href="@{/profile/{id}(id=${id})}" sec:authentication="name"></a><br/>

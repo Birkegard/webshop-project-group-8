@@ -24,6 +24,7 @@ public class CartController {
 
     @GetMapping
     public String showCart(@ModelAttribute("cart") Cart cart, Model model) {
+        model.addAttribute("activePage", "cart");
         return "cart";
     }
 
