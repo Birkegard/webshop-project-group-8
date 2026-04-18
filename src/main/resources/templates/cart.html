@@ -28,7 +28,7 @@
             <tbody>
             <tr th:each="item : ${cart.items}">
                 <td th:text="${item.productName}">Product</td>
-                <td th:text="${item.price}">0.00</td>
+                <td th:text="${#numbers.formatDecimal(item.price, 1, 2) + ' SEK'}"></td>
                 <td>
                     <form th:action="@{/cart/decrease/{id}(id=${item.productId})}" method="post"
                           style="display:inline;">
@@ -52,7 +52,7 @@
 
         <p>
             <strong>Total amount: </strong>
-            <span th:text="${cart.totalPrice}">0.00</span>
+            <span th:text="${#numbers.formatDecimal(cart.totalAmount, 1, 2) + ' SEK'}"></span>
         </p>
 
         <form th:action="@{/cart/clear}" method="post">

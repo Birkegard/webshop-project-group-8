@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Order Confirmation</title>
 </head>
 <body>
 
 <h1>Thank you for your order! 🎉</h1>
+
 <p>Your order has been placed successfully.</p>
 
-<a href="/">Back to home</a>
+<p><strong>Username:</strong>
+    <span th:text="${order.username}"></span>
+</p>
+
+<p><strong>Date:</strong>
+    <span th:text="${#temporals.format(order.orderDate, 'dd.MM.yyyy HH:mm')}"></span>
+</p>
+
+<p><strong>Total price:</strong>
+    <span th:text="${#numbers.formatDecimal(order.totalPrice, 1, 2) + ' SEK'}"></span>
+</p>
+
+<h3>Items:</h3>
+
+<ul>
+    <li th:each="item : ${order.orderItems}">
+        <span th:text="${item.productName}"></span> -
+        <span th:text="${item.quantity}"></span> kom) -
+        <span th:text="${#numbers.formatDecimal(item.price, 1, 2)}"></span>
+    </li>
+</ul>
+
+<a href="/products">Continue shopping</a>
 
 </body>
 </html>

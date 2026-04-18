@@ -4,17 +4,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.iths.christoffer.webshopprojectgroup8.cart.Cart;
+import se.iths.christoffer.webshopprojectgroup8.model.Order;
 import se.iths.christoffer.webshopprojectgroup8.model.Product;
+import se.iths.christoffer.webshopprojectgroup8.service.MailService;
+import se.iths.christoffer.webshopprojectgroup8.service.OrderService;
 import se.iths.christoffer.webshopprojectgroup8.service.ProductService;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/cart")
 @SessionAttributes("cart")
 public class CartController {
-    private final ProductService productService;
 
-    public CartController(ProductService productService) {
+    private final ProductService productService;
+    private final OrderService orderService;
+    private final MailService mailService;
+
+    public CartController(ProductService productService, OrderService orderService, MailService mailService) {
         this.productService = productService;
+        this.orderService = orderService;
+        this.mailService = mailService;
     }
 
     @ModelAttribute("cart")
@@ -34,12 +44,14 @@ public class CartController {
 
         Product product = productService.getProductById(id);
         cart.addItem(product);
+
         return "redirect:/cart";
     }
 
     @PostMapping("/remove/{id}")
     public String removeFromCart(@PathVariable Long id,
                                  @ModelAttribute("cart") Cart cart) {
+
         cart.removeItem(id);
         return "redirect:/cart";
     }
@@ -47,6 +59,7 @@ public class CartController {
     @PostMapping("/decrease/{id}")
     public String decreaseCart(@PathVariable Long id,
                                @ModelAttribute("cart") Cart cart) {
+
         cart.decreaseQuantity(id);
         return "redirect:/cart";
     }
@@ -58,8 +71,19 @@ public class CartController {
     }
 
     @PostMapping("/checkout")
-    public String checkout(@ModelAttribute("cart") Cart cart) {
+    public String checkout(@ModelAttribute("cart") Cart cart,
+                           Model model,
+                           Principal principal) {
+
+        String username = principal.getName();
+
+        Order order = orderService.createOrder(username, cart.getItems());
+        mailService.sendOrderEmail(username, order);
+
+        model.addAttribute("order", order);
+
         cart.clear();
+
         return "order-confirmation";
     }
 }

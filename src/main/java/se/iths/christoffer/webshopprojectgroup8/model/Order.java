@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class Order {
     private BigDecimal totalPrice;
 
     @Column(nullable = false)
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
@@ -36,7 +36,7 @@ public class Order {
     }
 
     public Order(Long id, String username,
-                 BigDecimal totalPrice, LocalDate orderDate,
+                 BigDecimal totalPrice, LocalDateTime orderDate,
                  List<OrderItem> orderItems) {
         this.id = id;
         this.username = username;
