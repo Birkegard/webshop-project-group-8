@@ -77,7 +77,7 @@ public class CartController {
 
         String username = principal.getName();
 
-        Order order = orderService.createOrder(username, cart());
+        Order order = orderService.createOrder(username, cart);
         mailService.sendOrderEmail(username, order);
 
         model.addAttribute("order", order);
