@@ -1,6 +1,8 @@
 package se.iths.christoffer.webshopprojectgroup8.service;
 
 import org.springframework.stereotype.Service;
+
+import se.iths.christoffer.webshopprojectgroup8.cart.Cart;
 import se.iths.christoffer.webshopprojectgroup8.cart.CartItem;
 import se.iths.christoffer.webshopprojectgroup8.model.Order;
 import se.iths.christoffer.webshopprojectgroup8.model.OrderItem;
@@ -8,6 +10,7 @@ import se.iths.christoffer.webshopprojectgroup8.repository.OrderRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,33 +23,45 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public Order createOrder(String username, List<CartItem> cartItems) {
-
+    public Order createOrder(String username, Cart cart){
         Order order = new Order();
         order.setUsername(username);
-        order.setOrderDate(LocalDateTime.now());
+        order.setOrderDate(LocalDate.now());
 
-        List<OrderItem> orderItems = new ArrayList<>();
-        BigDecimal totalPrice = BigDecimal.ZERO;
+        List<OrderItem> orderItems = mapCartItems(cart);
+        order.setOrderItems(orderItems);
 
-        for (CartItem cartItem : cartItems) {
+        order.setTotalPrice(cart.getTotalPrice());
 
-            OrderItem orderItem = new OrderItem();
-            orderItem.setProductName(cartItem.getProductName());
-            orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setPrice(cartItem.getPrice());
+        Order savedOrder = orderRepository.save(order);
 
-            orderItems.add(orderItem);
+        cart.clear();
 
-            BigDecimal itemTotal = cartItem.getPrice()
-                    .multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+        return savedOrder;
+    }
 
-            totalPrice = totalPrice.add(itemTotal);
+    private List<OrderItem> mapCartItems(Cart cart) {
+        List<OrderItem> items = new ArrayList<>();
+
+        for (CartItem cartItem : cart.getItems()) {
+
+            OrderItem item = new OrderItem();
+            item.setProductName(cartItem.getProductName());
+            item.setPrice(cartItem.getPrice());
+            item.setQuantity(cartItem.getQuantity());
+
+            items.add(item);
         }
 
-        order.setOrderItems(orderItems);
-        order.setTotalPrice(totalPrice);
-
-        return orderRepository.save(order);
+        return items;
     }
+
+    public List<Order> getOrdersByUsername(String username) {
+        return orderRepository.findByUsernameOrderByOrderDateDesc(username);
+    }
+
+
+
+
+
 }
