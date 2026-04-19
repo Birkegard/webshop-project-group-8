@@ -26,7 +26,7 @@ public class OrderService {
     public Order createOrder(String username, Cart cart){
         Order order = new Order();
         order.setUsername(username);
-        order.setOrderDate(LocalDate.now());
+        order.setOrderDate(LocalDateTime.now());
 
         List<OrderItem> orderItems = mapCartItems(cart);
         order.setOrderItems(orderItems);
