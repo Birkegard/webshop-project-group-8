@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import se.iths.christoffer.webshopprojectgroup8.cart.Cart;
 import se.iths.christoffer.webshopprojectgroup8.model.Order;
 import se.iths.christoffer.webshopprojectgroup8.model.Product;
-import se.iths.christoffer.webshopprojectgroup8.service.MailService;
 import se.iths.christoffer.webshopprojectgroup8.service.OrderService;
 import se.iths.christoffer.webshopprojectgroup8.service.ProductService;
 
@@ -19,12 +18,10 @@ public class CartController {
 
     private final ProductService productService;
     private final OrderService orderService;
-    private final MailService mailService;
 
-    public CartController(ProductService productService, OrderService orderService, MailService mailService) {
+    public CartController(ProductService productService, OrderService orderService) {
         this.productService = productService;
         this.orderService = orderService;
-        this.mailService = mailService;
     }
 
     @ModelAttribute("cart")
@@ -77,9 +74,8 @@ public class CartController {
 
         String username = principal.getName();
 
-        Order order = orderService.createOrder(username, cart);
-        mailService.sendOrderEmail(username, order);
-
+        Order order = orderService.createOrder(username, cart.getItems());
+        
         model.addAttribute("order", order);
 
         cart.clear();
