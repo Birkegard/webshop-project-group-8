@@ -40,7 +40,9 @@ public class SecurityConfig {
                                 "/registration/**",
                                 "/",
                                 "/css/**",
-                                "/privacypolicy").permitAll()
+                                "/privacypolicy",
+                                "/cookiepolicy",
+                                "/products").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
