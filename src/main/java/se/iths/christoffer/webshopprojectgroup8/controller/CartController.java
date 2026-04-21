@@ -1,10 +1,14 @@
 package se.iths.christoffer.webshopprojectgroup8.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import se.iths.christoffer.webshopprojectgroup8.cart.Cart;
+import se.iths.christoffer.webshopprojectgroup8.model.Order;
 import se.iths.christoffer.webshopprojectgroup8.model.Product;
+import se.iths.christoffer.webshopprojectgroup8.service.OrderService;
 import se.iths.christoffer.webshopprojectgroup8.service.ProductService;
 
 @Controller
@@ -12,9 +16,11 @@ import se.iths.christoffer.webshopprojectgroup8.service.ProductService;
 @SessionAttributes("cart")
 public class CartController {
     private final ProductService productService;
+    private final OrderService orderService;
 
-    public CartController(ProductService productService) {
+    public CartController(ProductService productService, OrderService orderService) {
         this.productService = productService;
+        this.orderService = orderService;
     }
 
     @ModelAttribute("cart")
@@ -55,5 +61,17 @@ public class CartController {
     public String clearCart(@ModelAttribute("cart") Cart cart) {
         cart.clear();
         return "redirect:/cart";
+    }
+
+    @PostMapping("/checkout")
+    public String checkout(@AuthenticationPrincipal UserDetails userDetails,
+                           @ModelAttribute("cart") Cart cart,
+                           Model model) {
+        //security plockar upp email i userdetails från sessionen
+
+        Order order = orderService.createOrder(userDetails.getUsername(), cart);
+        model.addAttribute("order", order);
+
+        return "order-confirmation";
     }
 }
