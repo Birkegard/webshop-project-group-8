@@ -1,8 +1,8 @@
 package se.iths.christoffer.webshopprojectgroup8.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import se.iths.christoffer.springmessenger.model.Email;
-import se.iths.christoffer.springmessenger.service.MessageService;
 import se.iths.christoffer.webshopprojectgroup8.cart.CartItem;
 import se.iths.christoffer.webshopprojectgroup8.model.Order;
 import se.iths.christoffer.webshopprojectgroup8.model.OrderItem;
@@ -14,15 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final MessageService messageService;
-
-    public OrderService(OrderRepository orderRepository, MessageService messageService) {
-        this.orderRepository = orderRepository;
-        this.messageService = messageService;
-    }
+    //private final MessageService messageService;
 
     public Order createOrder(String username, List<CartItem> cartItems) {
 
@@ -39,13 +35,13 @@ public class OrderService {
 
         BigDecimal totalPrice = calculateTotalPrice(cartItems);
         order.setTotalPrice(totalPrice);
-        
+
         Email email = new Email();
         email.setRecipient(username);
         email.setSubject("Order confirmation");
         email.setMessage("Thank you for your order! Total: " + totalPrice);
 
-        messageService.send(email);
+        //messageService.send(email);
 
         return orderRepository.save(order);
     }
