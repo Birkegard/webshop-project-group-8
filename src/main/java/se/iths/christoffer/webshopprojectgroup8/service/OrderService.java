@@ -78,7 +78,7 @@ public class OrderService {
 
         Email email = new Email();
         email.setRecipient(order.getUsername());
-        email.setSubject("Thank you for your order at CAYA Clothing!");
+        email.setSubject("Thank you for your order at CAYA Clothes!");
         email.setMessage(message.toString());
 
         messageService.send(email);
