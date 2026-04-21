@@ -21,6 +21,9 @@ public class RegistrationService {
     }
 
     public AppUser registration(AppUser appUser) {
+        if (appUserRepository.existsByUsername(appUser.getUsername())) {
+            throw new IllegalArgumentException("Email is already in use");
+        }
         String encryptedPassword = encoder.encode(appUser.getPassword());
         appUser.setRole("USER");
         appUser.setPassword(encryptedPassword);
