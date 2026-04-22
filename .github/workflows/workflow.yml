@@ -25,11 +25,19 @@ jobs:
           server-password: GITHUB_TOKEN
 
       - name: Bygg med Maven
-        run: mvn clean package -DskipTests
+        run: mvn clean package
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
-      - name: Kör tester
-        run: mvn test
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: birkegard
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: birkegard/webshop-project-group-8:1.0.0
